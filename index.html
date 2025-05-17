@@ -72,7 +72,6 @@
 
         <!-- Categories -->
         <section id="categories" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-
         </section>
 
         <section class="flex justify-between my-8">
@@ -81,15 +80,18 @@
         </section>
 
         <!-- Pet Card & Add Photo -->
-        <section class="flex flex-col lg:flex-row gap-8">
+        <section class="flex flex-col lg:flex-row gap-8 justify-center">
             <!-- Card  -->
-            <div id="pet-card" class="lg:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-
+            <div id="pet-card"
+                class="hidden lg:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
             </div>
-
+            <!-- Loading Spinner  -->
+            <div class="flex justify-center items-center">
+                <span id="loader" class="loading  loading-bars loading-md hidden"></span>
+            </div>
             <!-- Select Content  -->
             <section id="like-contents"
-                class="lg:w-1/4 grid grid-cols-2 gap-4 p-2 border border-gray-500 rounded-xl auto-rows-min">
+                class="hidden lg:w-1/4 grid grid-cols-2 gap-4 p-2 border border-gray-500 rounded-xl auto-rows-min">
             </section>
         </section>
 
@@ -103,6 +105,10 @@
         </dialog>
 
     </main>
+
+    <span class="countdown font-mono text-6xl">
+        <span style="--value :6;"></span>
+    </span>
 
     <footer class="bg-[#131313] text-white text-center lg:text-left py-20 mt-12">
         <section class="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">

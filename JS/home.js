@@ -41,10 +41,24 @@ let loadCategoriesVideos = (category) => {
 
 // fetch All Pets 
 let loadAllPets = async () => {
+    // 2s Loading 
+    const loader = document.getElementById("loader");
+    const petCard = document.getElementById("pet-card");
+    const likeContents = document.getElementById("like-contents");
+    // 2s Loading 
+    loader.classList.remove("hidden");
+    setTimeout(() => {
+        loader.classList.add("hidden");
+        petCard.classList.remove("hidden");
+        likeContents.classList.remove("hidden");
+    }, 2000);
+
     let url = "https://openapi.programming-hero.com/api/peddy/pets";
     let response = await fetch(url);
     let data = await response.json();
-    displayAllPets(data.pets);
+
+    const myTimeout = setTimeout(displayAllPets(data.pets), 1000);
+    // displayAllPets(data.pets);
 }
 
 // Display All Pets
