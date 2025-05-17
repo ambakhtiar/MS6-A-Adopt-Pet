@@ -1,0 +1,14 @@
+.fira-code {
+    font-family: "Fira Code", monospace;
+}
+
+.lato {
+    font-family: "Lato", sans-serif;
+}
+
+.active {
+    border: black solid 1px;
+    background-color: #0E7A81;
+    color: white;
+    font-weight: 700;
+}

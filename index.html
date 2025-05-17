@@ -7,7 +7,7 @@
     <title>Adopt Pet</title>
 
     <!-- Fab Icon -->
-    <link rel="icon" type="image/x-icon" href="./Assets/Logo.png">
+    <link rel="icon" type="image/x-icon" href="./images/logo.webp">
 
     <!-- Google Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +26,122 @@
 
 </head>
 
-<body>
-    <h1>AM Bakhtiar</h1>
+<body class="lato">
+    <header class="w-11/12 mx-auto">
+        <nav class="flex justify-between items-center  my-2">
+            <div class="flex items-center gap-2">
+                <img class="w-6 h-6" src="./images/logo.webp" alt="">
+                <h1 class="text-xl font-bold">Peddy</h1>
+            </div>
+            <div class="space-x-2 text-gray-600 hidden md:block">
+                <a class="text-lg" href="#">Home</a>
+                <a class="text-lg" href="#">Shop</a>
+                <a class="text-lg" href="#">Contact</a>
+            </div>
+            <div>
+                <i class="border border-blue-400 rounded-full p-2 fa-regular fa-user"></i>
+            </div>
+        </nav>
+
+        <section class="flex flex-col justify-center items-center text-center gap-5 mt-10">
+            <h4 class="text-lg font-semibold text-gray-600">Bringing Families Together ❤️‍🔥 </h4>
+            <h1 class="text-5xl font-bold w-4/5">Your Path to Adoption Starts Here</h1>
+            <p class="w-5/6">It is a long established fact that a reader will be distracted by the readable content of a
+                page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <!-- Way - 1 -->
+            <!-- <button onclick="location.href='#shop'"
+                class="p-3 rounded-lg bg-[#0E7A81] text-white hover:bg-gray-700">View
+                More</button> -->
+            <!-- Way - 2 -->
+            <button onclick="document.getElementById('shop').scrollIntoView({ behavior: 'smooth' })"
+                class="p-3 rounded-lg bg-[#0E7A81] text-white hover:bg-gray-700">View
+                More</button>
+            <img src="./images/pet.webp" alt="">
+        </section>
+    </header>
+
+    <main class="w-11/12 mx-auto">
+        <section id="shop" class="mt-10 space-y-4">
+            <h1 class="text-3xl font-bold text-center">Adopt Your Best Friend</h1>
+            <p class="w-5/6 text-center">It is a long established fact that a reader will be distracted by the readable
+                content of a
+                page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+        </section>
+
+        <!-- Categories -->
+        <section id="categories" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+
+        </section>
+
+        <section class="flex justify-between my-8">
+            <h2 class="text-2xl font-bold">Best Deal For You</h2>
+            <Button class="btn bg-[#0E7A81]">Sort by Price</Button>
+        </section>
+
+        <!-- Pet Card & Add Photo -->
+        <section class="flex flex-col lg:flex-row gap-8">
+            <!-- Card  -->
+            <div id="pet-card" class="lg:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+
+            </div>
+
+            <!-- Select Content  -->
+            <section id="like-contents"
+                class="lg:w-1/4 grid grid-cols-2 gap-4 p-2 border border-gray-500 rounded-xl auto-rows-min">
+            </section>
+        </section>
+
+        <!-- Display Pet Details by Modal  -->
+        <dialog id="customModel" class="modal">
+            <div class="modal-box w-11/12 max-w-5xl">
+                <section id="model-data">
+                </section>
+
+            </div>
+        </dialog>
+
+    </main>
+
+    <footer class="bg-[#131313] text-white text-center lg:text-left py-20 mt-12">
+        <section class="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="space-y-4">
+                <div class="flex justify-center lg:justify-start items-center gap- md:gap-4 mb-4">
+                    <img class="w-10 h-8 object-cover" src="./images/logo.webp" alt="">
+                    <h1 class="text-3xl font-bold">Peddy</h1>
+                </div>
+                <p>Location: av. Washington 165, NY CA 54003</p>
+                <p>Phone: +31 85 964 47 25</p>
+                <p>Email: info@yourdomain.com</p>
+                <p>Openings hours: 9.00 AM - 5.00 PM</p>
+                <div class="text-2xl flex gap-8 justify-center lg:justify-start">
+                    <a href="#"><i class="text-blue-700 fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="text-green-500 fa-brands fa-weixin"></i></a>
+                    <a href="#"><i class="text-red-600 fa-brands fa-quora"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-2xl font-bold">Useful Links</h4>
+                <ul class="mt-4 space-y-2">
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Animals</li>
+                    <li>Foundation</li>
+                    <li>Conatact</li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col gap-4 items-center lg:items-stretch">
+                <h4 class="text-2xl font-bold">Drop a Message</h4>
+                <input class=" bg-gray-500 py-2 px-2" type="text" placeholder="Enter your Email">
+                <button class="btn bg-[#0E7A81] border-none text-white">Subscribe</button>
+            </div>
+        </section>
+    </footer>
+
+    <script src="./JS/home.js"></script>
 </body>
 
 </html>
