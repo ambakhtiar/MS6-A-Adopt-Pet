@@ -41,24 +41,25 @@ let loadCategoriesVideos = (category) => {
 
 // fetch All Pets 
 let loadAllPets = async () => {
-    // 2s Loading 
+    // For 2s Loading Start
     const loader = document.getElementById("loader");
     const petCard = document.getElementById("pet-card");
     const likeContents = document.getElementById("like-contents");
-    // 2s Loading 
+
     loader.classList.remove("hidden");
     setTimeout(() => {
         loader.classList.add("hidden");
         petCard.classList.remove("hidden");
         likeContents.classList.remove("hidden");
     }, 2000);
+    // For 2s Loading End
 
     let url = "https://openapi.programming-hero.com/api/peddy/pets";
     let response = await fetch(url);
     let data = await response.json();
 
-    const myTimeout = setTimeout(displayAllPets(data.pets), 1000);
-    // displayAllPets(data.pets);
+    // const myTimeout = setTimeout(displayAllPets(data.pets), 1000);
+    displayAllPets(data.pets);
 }
 
 // Display All Pets
@@ -68,11 +69,13 @@ let displayAllPets = (data) => {
 
     if (data.length === 0) {
         let div = document.createElement("div");
-        div.classList = "flex flex-col justify-center items-center text-center p-12 gap-8 bg-blue-50";
+        div.classList = "flex flex-col justify-center items-center text-center p-8 gap-8 bg-[#edf6f7] rounded-xl";
         div.innerHTML = `
-            <img class="w-80 h-100 items-center object-cover" src="./images/error.webp" alt="">
+            <div>
+                <img class="items-center object-cover" src="./images/error.webp" alt="">
+            </div>
             <h2 class="text-4xl font-bold">No Information Available</h2>
-            <p class="w-4/5">It is a long established fact that a reader will be distracted by the readable content of a
+            <p class="text-gray-600">It is a long established fact that a reader will be distracted by the readable content of a
                 page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
         `;
         petCard.classList.remove("grid");
@@ -94,12 +97,64 @@ let displayAllPets = (data) => {
             <div class="divider"></div>
             <div class="flex justify-between items-center">
                 <button onclick="showLikeContent('${item.image}')" class="border border-blue-100 py-1 px-3 btn bg-white"><i class="fa-regular fa-heart"></i></button>
-                <button class="border border-blue-100 py-1 px-3 btn bg-white">Adopt</button>
+                <button onclick="adoptModal('${item.petId}')" id="adopt-btn-${item.petId}" class="border border-blue-100 py-1 px-3 btn bg-white">Adopt</button>
                 <button onclick="loadPetDetails('${item.petId}')" class="border border-blue-100 py-1 px-3 btn bg-white">Details</button>
             <div>
         `;
         petCard.append(div);
     })
+}
+
+// click sort buttton, then sorted pets according to price 
+let flag = true;
+document.getElementById('btn-sort').
+    addEventListener("click", async function () {
+        let url = "https://openapi.programming-hero.com/api/peddy/pets";
+        let response = await fetch(url);
+        let data = await response.json();
+
+        // Descending or Asscending 
+        if (flag) {
+            flag = false;
+            data.pets.sort(function (a, b) {
+                return a.price - b.price;
+            })
+        } else {
+            flag = true;
+            data.pets.sort(function (a, b) {
+                return b.price - a.price;
+            })
+        }
+        displayAllPets(data.pets);
+    })
+
+// Click Adopt button show congrats msg then button disable 
+let timer;
+function adoptModal(id) {
+    countdownValue = 3;
+    document.getElementById("countdown").innerText = countdownValue;
+    const modal = document.getElementById("myModal");
+    modal.classList.remove("hidden");
+
+    // Clear any existing timer
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+        countdownValue--;
+        document.getElementById("countdown").innerText = countdownValue;
+
+        if (countdownValue <= 0) {
+            clearInterval(timer);
+            closeModal();
+        }
+    }, 750);
+
+    // console.log(`adopt-btn-${id}`)
+    document.getElementById(`adopt-btn-${id}`).disabled = true;
+}
+
+function closeModal() {
+    document.getElementById("myModal").classList.add("hidden");
 }
 
 // Fetch Pet Details by pet ID
@@ -110,13 +165,15 @@ let loadPetDetails = (id) => {
         then(data => displayPetDetails(data.petData)).
         catch(error => console.log(error));
 }
-
+// display pet details as modal 
 let displayPetDetails = (data) => {
-    console.log(data)
+    // console.log(data)
     let modelData = document.getElementById("model-data");
     modelData.innerHTML = `
-    <div class="p-6 flex flex-col gap-4 justify-center text-left">
-        <img class="w-90 h-70 rounded-xl object-cover items-center" src=${(data.image) ? data.image : "Not Found"} alt="">
+    <div class="mx-auto max-w-2xl p-6 flex flex-col gap-4 justify-center text-left" >
+        <div>
+            <img class="max-w-full rounded-xl object-cover items-center" src=${(data.image) ? data.image : "Not Found"} alt="">
+        </div>
         <h2 class="text-2xl font-bold">${(data.pet_name) ? data.pet_name : "Not Found"}</h2>
         <div class="grid grid-cols-2 gap-x-4 gap-y-2 ">
             <p><i class="fa-solid fa-clover"></i> Breed: ${(data.breed) ? data.breed : "Not Found"}</p>
@@ -129,17 +186,17 @@ let displayPetDetails = (data) => {
         <p><i class="fa-solid fa-syringe"></i> Vaccinated status: ${(data.vaccinated_status) ? data.vaccinated_status : "Not Found"}</p>
         <div class="divider"></div>
         <h2 class="text-xl font-bold">Details Information</h2>
-        <p class="">${data.pet_details}</p>
+        <p class="max-w-full">${data.pet_details}</p>
 
         <div class="">
-            <form class="w-full" method="dialog">
+            <form class="" method="dialog">
                 <button class="w-full btn bg-blue-200">Close</button>
             </form>
         </div>
     </div>    
     `;
 
-    document.getElementById('customModel').showModal();
+    document.getElementById('petDetailsBtnModal').showModal();
 }
 
 
@@ -166,3 +223,4 @@ const removeActiveBtn = () => {
 
 loadCategories();
 loadAllPets();
+

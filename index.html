@@ -31,7 +31,7 @@
         <nav class="flex justify-between items-center  my-2">
             <div class="flex items-center gap-2">
                 <img class="w-6 h-6" src="./images/logo.webp" alt="">
-                <h1 class="text-xl font-bold">Peddy</h1>
+                <h1 class="text-3xl font-bold">Peddy</h1>
             </div>
             <div class="space-x-2 text-gray-600 hidden md:block">
                 <a class="text-lg" href="#">Home</a>
@@ -42,7 +42,7 @@
                 <i class="border border-blue-400 rounded-full p-2 fa-regular fa-user"></i>
             </div>
         </nav>
-
+        <!-- Banner  -->
         <section class="flex flex-col justify-center items-center text-center gap-5 mt-10">
             <h4 class="text-lg font-semibold text-gray-600">Bringing Families Together ❤️‍🔥 </h4>
             <h1 class="text-5xl font-bold w-4/5">Your Path to Adoption Starts Here</h1>
@@ -62,6 +62,7 @@
     </header>
 
     <main class="w-11/12 mx-auto">
+        <!-- Title  -->
         <section id="shop" class="mt-10 space-y-4">
             <h1 class="text-3xl font-bold text-center">Adopt Your Best Friend</h1>
             <p class="w-5/6 text-center">It is a long established fact that a reader will be distracted by the readable
@@ -74,9 +75,10 @@
         <section id="categories" class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
         </section>
 
+        <!-- title and Sort Button -->
         <section class="flex justify-between my-8">
             <h2 class="text-2xl font-bold">Best Deal For You</h2>
-            <Button class="btn bg-[#0E7A81]">Sort by Price</Button>
+            <Button id="btn-sort" class="btn bg-[#0E7A81]">Sort by Price</Button>
         </section>
 
         <!-- Pet Card & Add Photo -->
@@ -91,24 +93,31 @@
             </div>
             <!-- Select Content  -->
             <section id="like-contents"
-                class="hidden lg:w-1/4 grid grid-cols-2 gap-4 p-2 border border-gray-500 rounded-xl auto-rows-min">
+                class="hidden lg:w-1/4 grid grid-cols-2 auto-rows-min flex-col-reverse gap-4 p-2 border border-gray-500 rounded-xl">
             </section>
         </section>
 
         <!-- Display Pet Details by Modal  -->
-        <dialog id="customModel" class="modal">
-            <div class="modal-box w-11/12 max-w-5xl">
+        <dialog id="petDetailsBtnModal" class="modal">
+            <div class="modal-box w-11/12 max-w-3xl">
                 <section id="model-data">
                 </section>
-
             </div>
         </dialog>
 
-    </main>
+        <!-- Adopt Message  -->
+        <div id="myModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="modal-box w-11/12 max-w-xl items-center text-center">
+                <div>
+                    <img class="w-1/2 h-1/2 mx-auto" src="./images/handsake.gif" />
+                </div>
+                <h2 class="text-3xl font-bold">Congrates </h2>
+                <p>Adopt Process is Start for You Loveable Pet</p>
+                <p class="text-4xl font-bold" id="countdown"></p>
+            </div>
+        </div>
 
-    <span class="countdown font-mono text-6xl">
-        <span style="--value :6;"></span>
-    </span>
+    </main>
 
     <footer class="bg-[#131313] text-white text-center lg:text-left py-20 mt-12">
         <section class="w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -147,7 +156,9 @@
         </section>
     </footer>
 
+    <!-- JS File  -->
     <script src="./JS/home.js"></script>
+    <script src="./JS/text.js"></script>
 </body>
 
 </html>

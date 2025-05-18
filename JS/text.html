@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt Pet</title>
+
+    <!-- Fab Icon -->
+    <link rel="icon" type="image/x-icon" href="./images/logo.webp">
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- Daisy UI v4 with Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/eb3cadc904.js" crossorigin="anonymous"></script>
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <!-- Trigger Button -->
+    <button onclick="openModal()">Open Modal</button>
+
+    <!-- Modal -->
+    <div>
+        <div id="myModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded shadow w-fit text-center">
+                <p class="text-4xl font-bold" id="countdown"></p>
+                <p class="mt-2">Closing when it reaches 0</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let countdownValue = 5;
+        let timer;
+
+        function openModal() {
+            console.log("call auto")
+            countdownValue = 5;
+            document.getElementById("countdown").innerText = countdownValue;
+            const modal = document.getElementById("myModal");
+            modal.classList.remove("hidden");
+
+            // Clear any existing timer
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+                countdownValue--;
+                document.getElementById("countdown").innerText = countdownValue;
+
+                if (countdownValue <= 0) {
+                    clearInterval(timer);
+                    closeModal();
+                }
+            }, 1000);
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").classList.add("hidden");
+        }
+    </script>
+
+</body>
+
+</html>
