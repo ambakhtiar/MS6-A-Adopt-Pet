@@ -28,7 +28,7 @@
 
 <body class="lato">
     <header class="w-11/12 mx-auto">
-        <nav class="flex justify-between items-center  my-2">
+        <nav class="flex justify-between items-center my-2">
             <div class="flex items-center gap-2">
                 <img class="w-6 h-6" src="./images/logo.webp" alt="">
                 <h1 class="text-3xl font-bold">Peddy</h1>
@@ -78,14 +78,33 @@
         <!-- title and Sort Button -->
         <section class="flex justify-between my-8">
             <h2 class="text-2xl font-bold">Best Deal For You</h2>
-            <Button id="btn-sort" class="btn bg-[#0E7A81]">Sort by Price</Button>
+            <!-- Hover to show a message on button  -->
+            <div class="relative group inline-block cursor-pointer">
+                <div class="dropdown">
+                    <Button id="btn-sort" tabindex="0" role="button" class="btn m-1 bg-[#0E7A81] text-white">Sort by
+                        Price</Button>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                        <li onclick="sortByCategory('All')"><a>All Pets Sort</a></li>
+                        <li onclick="sortByCategory('Cat')"><a>Cat Sort</a></li>
+                        <li onclick="sortByCategory('Dog')"><a>Dog Sort</a></li>
+                        <li onclick="sortByCategory('Rabbit')"><a>Rabbit Sort</a></li>
+                        <li onclick="sortByCategory('Bird')"><a>Bird Sort</a></li>
+                    </ul>
+                </div>
+
+                <div class="absolute bottom-full mb-2 -left-20 hidden group-hover:block 
+              bg-gray-600 text-white text-sm rounded px-2 py-1 
+              whitespace-nowrap z-10 ">
+                    Ascending or Descending Order <br>Sort for Multiple Click
+                </div>
+            </div>
         </section>
 
         <!-- Pet Card & Add Photo -->
-        <section class="flex flex-col lg:flex-row gap-8 justify-center">
+        <section class="flex flex-col md:flex-row gap-8 justify-center">
             <!-- Card  -->
             <div id="pet-card"
-                class="hidden lg:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
+                class="hidden md:w-2/3 lg:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
             </div>
             <!-- Loading Spinner  -->
             <div class="flex justify-center items-center">
@@ -93,7 +112,7 @@
             </div>
             <!-- Select Content  -->
             <section id="like-contents"
-                class="hidden lg:w-1/4 grid grid-cols-2 auto-rows-min gap-4 p-2 border border-gray-500 rounded-xl">
+                class="hidden lg:w-1/4 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 auto-rows-min gap-4 p-2 border border-gray-500 rounded-xl">
             </section>
         </section>
 
@@ -107,7 +126,7 @@
 
         <!-- Adopt Message  -->
         <div id="myModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="modal-box w-11/12 max-w-xl items-center text-center">
+            <div class="modal-box w-11/12 max-w-xl items-center text-center space-y-4">
                 <div>
                     <img class="w-1/2 h-1/2 mx-auto" src="./images/handsake.gif" />
                 </div>
@@ -158,7 +177,6 @@
 
     <!-- JS File  -->
     <script src="./JS/home.js"></script>
-    <script src="./JS/text.js"></script>
 </body>
 
 </html>

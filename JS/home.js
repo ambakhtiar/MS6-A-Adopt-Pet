@@ -25,19 +25,27 @@ let displayCategories = (data) => {
 }
 
 // fetch in category type videos 
-let loadCategoriesVideos = (category) => {
+let loadCategoriesVideos = async (category, flag = 1) => {
     const url = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
-    fetch(url).
-        then(response => response.json()).
-        then(info => {
-            console.log(info.data);
-            removeActiveBtn();
-            const activeBtn = document.getElementById(`btn-${category}`);
-            activeBtn.classList.add("active");
-            displayAllPets(info.data)
-        }).
-        catch(error => console.error());
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const pets = data.data;
+
+        removeActiveBtn();
+        const activeBtn = document.getElementById(`btn-${category}`);
+        if (activeBtn) activeBtn.classList.add("active");
+
+        if (flag == 1) {
+            displayAllPets(pets);
+        } else {
+            return pets;
+        }
+    } catch (error) {
+        console.error("Error loading category:", error);
+    }
 }
+
 
 // fetch All Pets 
 let loadAllPets = async () => {
@@ -107,26 +115,30 @@ let displayAllPets = (data) => {
 
 // click sort buttton, then sorted pets according to price 
 let flag = true;
-document.getElementById('btn-sort').
-    addEventListener("click", async function () {
-        let url = "https://openapi.programming-hero.com/api/peddy/pets";
-        let response = await fetch(url);
-        let data = await response.json();
+async function sortByCategory(category) {
+    let info;
 
-        // Descending or Asscending 
-        if (flag) {
-            flag = false;
-            data.pets.sort(function (a, b) {
-                return a.price - b.price;
-            })
-        } else {
-            flag = true;
-            data.pets.sort(function (a, b) {
-                return b.price - a.price;
-            })
-        }
-        displayAllPets(data.pets);
-    })
+    if (category === "All") {
+        const url = "https://openapi.programming-hero.com/api/peddy/pets";
+        const response = await fetch(url);
+        const data = await response.json();
+        info = data.pets;
+    } else {
+        info = await loadCategoriesVideos(category, 0); // wait for returned array
+    }
+
+    // Sorting by price
+    if (flag) {
+        flag = false;
+        info.sort((a, b) => a.price - b.price);
+    } else {
+        flag = true;
+        info.sort((a, b) => b.price - a.price);
+    }
+
+    displayAllPets(info); // use sorted data
+}
+
 
 // Click Adopt button show congrats msg then button disable 
 let timer;
